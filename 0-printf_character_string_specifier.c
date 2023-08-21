@@ -1,11 +1,10 @@
 #include "main.h"
 /**
- *_printf-function that executes printf
- *@format: string to be formatted
+ * _printf-function that executes printf
+ * @format: string to be formatted
  *
- *Return: the number of characters
+ * Return: the number of characters
  */
-
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -14,47 +13,38 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 	count = 0;
-	
+
 	while (*format)
-	{	
+	{
 		if (*format == '%')
 		{
 			format++;
-			
 			switch (*format)
 			{
 				case 'c':
-					putchar(va_arg(args, int));
-					count++;
+					putchar(va_arg(args, int)), count++;
 					break;
 				case 's':
 					str = va_arg(args, const char *);
-					while(*str)
+					while (*str)
 					{
-						putchar(*str);
-						count++;
-						str++;
+						putchar(*str), count++, str++;
 					}
 					break;
 				case '%':
-					putchar('%');
-					count++;
+					putchar('%'), count++;
 					break;
 				default:
-					putchar('%');
-					putchar(*format);
-					count += 2;
+					putchar('%'), putchar(*format), count += 2;
 					break;
 			}
 		}
 		else
 		{
-			putchar(*format);
-			count ++;
+			putchar(*format), count++;
 		}
 		format++;
 	}
 	va_end(args);
 	return (count);
-}				
-					
+}
