@@ -6,5 +6,9 @@
 #include <unistd.h>
 
 int _printf(const char *format, ...);
-int print_int(char *format, ...);
+int _print_char(va_list args);
+int _print_int(va_list args);
+int _print_string(va_list args);
+int dispatcher(const char specifier, va_list args);
+
 #endif

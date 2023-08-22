@@ -9,41 +9,24 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int count;
-	const char *str;
 
 	va_start(args, format);
 	count = 0;
 
+	if (format == NULL)
+		return (-1);
+
 	while (*format)
 	{
-		if (format == NULL)
-		return(-1);
 		if (*format == '%')
 		{
 			format++;
-			switch (*format)
-			{
-				case 'c':
-					putchar(va_arg(args, int)), count++;
-					break;
-				case 's':
-					str = va_arg(args, const char *);
-					while (*str != '\0' && str != NULL)
-					{
-						putchar(*str), count++, str++;
-					}
-					break;
-				case '%':
-					putchar('%'), count++;
-					break;
-				default:
-					putchar('%'), putchar(*format), count += 2;
-					break;
-			}
+			count += dispatcher(*format, args);
 		}
 		else
 		{
-			putchar(*format), count++;
+			putchar(*format);
+			count++;
 		}
 		format++;
 	}

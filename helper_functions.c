@@ -1,49 +1,55 @@
 #include "main.h"
 /**
- * _printf - Custom printf function to handle nummbers
- * @format: The format string
+ * _print_int - Custom printf function to handle nummbers.
+ * @args: List of arguments.
  *
- * Return: The number of characters printed
+ * Return: The number of characters printed.
  */
-int print_int(char *format, ...)
+int _print_int(va_list args)
 {
-	va_list args;
 	int count, length, number;
-	char string[100];
+	int digits[10];
 
-	count = 0, length = 0, va_start(args, format);
+	count = 0;
+	length = 0;
+	number = va_arg(args, int);
 
-	while (*format && format)
+	if (number < 0)
 	{
-		if (*format == '%')
-		{
-			format++;
-			switch (*format)
-			{
-				case 'd':
-				case 'i':
-					number = va_arg(args, int);
-					if (number < 0)
-						write(1, "-", 1), number = -number, count++;
-					do {
-						string[length++] = number % 10 + '0', number /= 10;
-					} while (number);
-					while (length > 0)
-						length--, write(1, &string[length], 1), count++;
-					break;
-				case '%':
-					write(1, "%", 1), count++;
-					break;
-
-				default:
-					write(1, format - 1, 2), count += 2;
-					break;
-			}
-		}
-		else
-			write(1, format, 1), count++;
-		format++;
+		putchar('-');
+		number = -number;
+		count++;
 	}
-	va_end(args);
+	do {
+		digits[length++] = number % 10;
+		number /= 10;
+	} while (number);
+	while (length > 0)
+	{
+		length--;
+		putchar(digits[length] + '0');
+		count++;
+	}
+	return (count);
+}
+
+/**
+ * _print_string - Custom function to handle strings.
+ * @args: List of arguments.
+ *
+ * Return: The number of characters printed.
+ */
+int _print_string(va_list args)
+{
+	const char *str;
+	int count;
+
+	count = 0;
+	str = va_arg(args, const char *);
+
+	while (*str != '\0' && str != NULL)
+	{
+		putchar(*str), count++, str++;
+	}
 	return (count);
 }
