@@ -1,13 +1,15 @@
 #include "main.h"
 /**
- * _printf_int - Custom printf function to handle nummbers
+ * _printf - Custom printf function to handle nummbers
  * @format: The format string
  *
  * Return: The number of characters printed
  */
-int _printf_int(const char *format, ...)
+int _printf(const char *format, ...)
 {
-	va_list args, int count, length, number, char string[100];
+	va_list args;
+	int count, length, number;
+	char string[100];
 
 	count = 0, length = 0, va_start(args, format);
 
@@ -30,16 +32,16 @@ int _printf_int(const char *format, ...)
 						length--, write(1, &string[length], 1), count++;
 					break;
 				case '%':
-					write(1, "%", 1), count++, break;
+					write(1, "%", 1), count++;
+					break;
 
 				default:
-					write(1, format - 1, 2), count += 2, break;
+					write(1, format - 1, 2), count += 2;
+					break;
 			}
 		}
 		else
-		{
-		write(1, format, 1), count++;
-		}
+			write(1, format, 1), count++;
 		format++;
 	}
 	va_end(args);
