@@ -3,7 +3,9 @@
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <unistd.h>
 
 int _printf(const char *format, ...);
+int _printf_int(const char *format, ...);
 
 #endif
