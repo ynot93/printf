@@ -24,6 +24,9 @@ int dispatcher(const char specifier, va_list args)
 		case 'b':
 			return (handle_binary(args));
 			break;
+		case 'u':
+			return (handle_u(args));
+			break;
 		case '%':
 			putchar('%');
 			return (1);
