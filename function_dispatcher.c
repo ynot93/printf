@@ -30,6 +30,8 @@ int dispatcher(const char specifier, va_list args)
 			return (handle_X(args));
 		case 'S':
 			return (handle_S(args));
+		case 'p':
+			return (handle_p(args));
 		case '%':
 			putchar('%');
 			return (1);
