@@ -8,7 +8,7 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int count, buffer_index;
+	int count, buffer_index, i;
 	char buffer[BUFFER_SIZE];
 
 	va_start(args, format);
@@ -32,14 +32,17 @@ int _printf(const char *format, ...)
 		}
 		if (buffer_index >= BUFFER_SIZE - 1)
 		{
-			write(1, buffer, buffer_index);
+			for (i = 0; i < buffer_index; i++)
+				putchar(buffer[i]);
 			buffer_index = 0;
 		}
 		format++;
 	}
 	if (buffer_index > 0)
-		write(1, buffer, buffer_index);
-
+	{
+		for (i = 0; i < buffer_index; i++)
+			putchar(buffer[i]);
+	}
 	va_end(args);
 	return (count);
 }
