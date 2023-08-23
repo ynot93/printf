@@ -17,5 +17,6 @@ int handle_u(va_list args);
 int handle_o(va_list args);
 int handle_x(va_list args);
 int handle_X(va_list args);
+int handle_S(va_list args);
 
 #endif
